@@ -1,0 +1,105 @@
+﻿@model DashboardViewModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Library Dashboard";
+}
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+    <div class="row mb-5">
+        <!-- Total Books, Available Books, Overdue Books -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body bg-success shadow rounded-5">
+                    <h4>Total Books</h4>
+                    <p>@Model.TotalBooks</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body bg-warning shadow rounded-5">
+                    <h4>Available Books</h4>
+                    <p>@Model.AvailableBooks</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body bg-secondary shadow rounded-5">
+                    <h4>Overdue Books</h4>
+                    <p>@Model.OverdueBooks</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body bg-primary shadow rounded-5">
+                    <h4>Genres</h4>
+                    <p>@Model.TotalGenres</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mt-3 ">
+            <div class="card">
+                <div class="card-body bg-danger shadow rounded-5">
+                    <h4>Transaction</h4>
+                    <p>@Model.TotalTransactions</p>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+
+    <h3 class="mb-3">Recent Transactions</h3>
+    <table class="table table-hover  mb-5">
+        <thead>
+            <tr>
+                <th>Book Title</th>
+                <th>User</th>
+                <th>Borrowed Date</th>
+                <th>Return Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in Model.RecentBookloans)
+            {
+                <tr>
+                    <td>@transaction.Book.Title</td>
+                    <td>@transaction.Member.MemberName</td>
+                    <td>@transaction.LoanDate.ToString("dd/MM/yyyy")</td>
+                    <td>@transaction.ReturnDate.ToString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+   @*  <h3>Most Borrowed Books</h3>
+    <ul>
+        @foreach (var book in Model.MostBorrowedBooks)
+        {
+            <li>@book.Title - @book.Count times borrowed</li>
+        }
+    </ul> *@
+
+    <h3>Books per Genre</h3>
+    <canvas id="genreChart" width="100px"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('genreChart').getContext('2d');
+        var genreChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Actoin', 'biography', 'Science', 'History'],  // Add genres dynamically
+                datasets: [{
+                    label: 'Books per Genre',
+                    data: [12, 19, 3, 5], // Add dynamic data
+                    backgroundColor: ['red', 'blue', 'green', 'yellow']
+                }]
+            }
+        });
+    </script>
+</div>
+

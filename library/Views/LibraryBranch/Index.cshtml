@@ -1,0 +1,44 @@
+﻿@model IEnumerable<LibraryBranch>
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Library Branch List";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a class="btn btn-primary" href="@Url.Action("Create")">Create New Library Branch</a>
+</p>
+
+<table id="table" class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var libraryBranch in Model)
+        {
+            <tr>
+                <td>@libraryBranch.Id</td>
+                <td>@libraryBranch.Name</td>
+                <td>@libraryBranch.Location</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = libraryBranch.Id })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("Details", new { id = libraryBranch.Id })" class="btn btn-info">Details</a>
+                    <a href="@Url.Action("Delete", new { id = libraryBranch.Id })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+        $('.table').DataTable();
+    </script>
+}
+

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Genre>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Genres List";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<a href="@Url.Action("Create", "Genre")" class="btn btn-primary mb-3">Create New Genre</a>
+
+<table id="table" class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var genre in Model)
+        {
+            <tr>
+                <td>@genre.Name</td>
+                <td>
+                    <a href="@Url.Action("Create", "Genre", new { id = genre.Id })" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="@Url.Action("Delete", "Genre", new { id = genre.Id })" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this genre?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+        $('.table').DataTable();
+    </script>
+}

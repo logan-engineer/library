@@ -1,0 +1,108 @@
+﻿@model Book
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Edit Book";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text text-uppercase">Edit</h2>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-8  border">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control shadow" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ISBN" class="control-label"></label>
+                    <input asp-for="ISBN" class="form-control shadow" />
+                    <span asp-validation-for="ISBN" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="AuthorId" class="control-label"></label>
+                    <select asp-for="AuthorId" class="form-control shadow" asp-items="ViewBag.AuthorId"></select>
+                    <span asp-validation-for="AuthorId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PublisherId" class="control-label"></label>
+                    <select asp-for="PublisherId" class="form-control shadow" asp-items="ViewBag.PublisherId"></select>
+                    <span asp-validation-for="PublisherId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="GenreId" class="control-label"></label>
+                    <select asp-for="GenreId" class="form-control shadow" asp-items="ViewBag.GenreId"></select>
+                    <span asp-validation-for="GenreId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PublishedDate" class="control-label"></label>
+                    <input asp-for="PublishedDate" class="form-control shadow" />
+                    <span asp-validation-for="PublishedDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control shadow" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LowasPrice" class="control-label"></label>
+                    <input asp-for="LowasPrice" class="form-control shadow" />
+                    <span asp-validation-for="LowasPrice" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PageCount" class="control-label"></label>
+                    <input asp-for="PageCount" class="form-control shadow" />
+                    <span asp-validation-for="PageCount" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" class="form-control shadow"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Image" class="form-label"></label>
+                    <input type="file" name="files" id="uploadbox" class="form-control shadow" />
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" asp-for="IsAvailable" />
+                    <label class="form-check-label" asp-for="IsAvailable">Available</label>
+                </div>
+                
+                <div class="form-group">
+                <button type="submit" class="btn btn-warning">Update</button>
+                <a href="@Url.Action("Index")" class="btn btn-secondary">Back to List</a>
+                </div>
+            </form>
+
+        </div>
+        <div class="col-md-4 ">
+            @if (Model.Image != null)
+            {
+                <img src="@Model.Image" width="100%" />
+            }
+        </div>
+
+    </div>
+
+
+
+</div>
+@section scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

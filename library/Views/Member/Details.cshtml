@@ -1,0 +1,69 @@
+﻿@model Member
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Member Details";
+}
+
+<!-- Page Header -->
+<div class="container my-4">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    <p>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Back to Members List</a>
+        <a href="@Url.Action("Edit", new { id = Model.Id })" class="btn btn-warning">Edit</a>
+        <a href="@Url.Action("Delete", new { id = Model.Id })" class="btn btn-danger">Delete</a>
+    </p>
+</div>
+
+<!-- Member Details -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Member Information</h3>
+            <dl class="row">
+                <dt class="col-sm-3">Member Name:</dt>
+                <dd class="col-sm-9">@Model.MemberName</dd>
+
+                <dt class="col-sm-3">Contact:</dt>
+                <dd class="col-sm-9">@Model.Contact</dd>
+
+                <dt class="col-sm-3">ID:</dt>
+                <dd class="col-sm-9">@Model.Id</dd>
+            </dl>
+        </div>
+
+        <!-- Display Book Loans if available -->
+        @if (Model.BookLoans != null && Model.BookLoans.Any())
+        {
+            <div class="col-md-6">
+                <h3>Book Loans</h3>
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Book ID</th>
+                            <th>Loan Date</th>
+                            <th>Return Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var loan in Model.BookLoans)
+                        {
+                            <tr>
+                                <td>@loan.BookId</td>
+                                <td>@loan.LoanDate.ToShortDateString()</td>
+                                <td>@(loan.ReturnDate?.ToShortDateString() ?? "Not Returned")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-6">
+                <h3>No Book Loans</h3>
+                <p>This member has no book loans at the moment.</p>
+            </div>
+        }
+    </div>
+</div>

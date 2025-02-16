@@ -1,0 +1,29 @@
+﻿@model Publisher
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Publisher Details";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <h4>Publisher</h4>
+    <dl class="dl-horizontal">
+        <dt>Name</dt>
+        <dd>@Model.Name</dd>
+
+        <dt>Address</dt>
+        <dd>@Model.Address</dd>
+
+        <dt>Books</dt>
+        <dd>
+            @foreach (var book in Model.Books)
+            {
+                <p>@book.Title</p>
+            }
+        </dd>
+    </dl>
+</div>
+
+<a href="@Url.Action("Index")" class="btn btn-secondary">Back to List</a>

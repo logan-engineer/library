@@ -1,0 +1,46 @@
+﻿@model IEnumerable<BookLoan>
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Book Loans";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a class="btn btn-primary" href="@Url.Action("Create")">Create New Book Loan</a>
+</p>
+
+<table id="table" class="table">
+    <thead>
+        <tr>
+            <th>Book</th>
+            <th>Member</th>
+            <th>Loan Date</th>
+            <th>Return Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bookLoan in Model)
+        {
+            <tr>
+                <td>@bookLoan.Book.Title</td>
+                <td>@bookLoan.Member.Id</td>
+                <td>@bookLoan.LoanDate.ToString("yyyy-MM-dd")</td>
+                <td>@(bookLoan.ReturnDate.HasValue ? bookLoan.ReturnDate.Value.ToString("yyyy-MM-dd") : "Not Returned")</td>
+                <td>@bookLoan.LoanStatus</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = bookLoan.Id })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("Delete", new { id = bookLoan.Id })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+        $('.table').DataTable();
+    </script>
+}

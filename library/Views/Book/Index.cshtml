@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Book>
+
+@{
+   
+    Layout = "_AdminLayout";
+   
+
+    ViewData["Title"] = "Books List";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a class="btn btn-primary shadow" href="@Url.Action("Create")">Create New Book</a>
+</p>
+
+<table id="table" class="table table-bordered table-striped shadow">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>Genre</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Author.Name</td>
+                <td>@book.Publisher.Name</td>
+                <td>@book.Genre.Name</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = book.Id })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("Details", new { id = book.Id })" class="btn btn-info">Details</a>
+                    <a href="@Url.Action("Delete", new { id = book.Id })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+        $('.table').DataTable();
+    </script>
+}

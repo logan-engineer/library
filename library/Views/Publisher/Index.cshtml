@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Publisher>
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Publishers List";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a class="btn btn-primary" href="@Url.Action("Create")">Create New Publisher</a>
+</p>
+
+<table ontimeupdate="table" class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var publisher in Model)
+        {
+            <tr>
+                <td>@publisher.Id</td>
+                <td>@publisher.Name</td>
+                <td>@publisher.Address</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = publisher.Id })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("Details", new { id = publisher.Id })" class="btn btn-info">Details</a>
+                    <a href="@Url.Action("Delete", new { id = publisher.Id })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+        $('.table').DataTable();
+    </script>
+}
+

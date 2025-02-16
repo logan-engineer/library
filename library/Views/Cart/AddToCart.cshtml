@@ -1,0 +1,15 @@
+﻿@model Book
+
+@{
+    ViewData["Title"] = "Add Cart";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>Are you sure you want to Add cart the Book "@Model.Title"?</p>
+<form asp-action="AddToCart" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Add To Cart</button>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Cancel</a>
+</form>
+

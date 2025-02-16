@@ -1,0 +1,50 @@
+﻿@model Member
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Edit Member";
+}
+
+<!-- Page Header -->
+<div class="container my-4">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    <p>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Back to Members List</a>
+    </p>
+</div>
+
+<!-- Edit Member Form -->
+<div class="container">
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="MemberName" class="control-label"></label>
+                    <input asp-for="MemberName" class="form-control" placeholder="Enter member name" />
+                    <span asp-validation-for="MemberName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Contact" class="control-label"></label>
+                    <input asp-for="Contact" class="form-control" placeholder="Enter contact information" />
+                    <span asp-validation-for="Contact" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+    </form>
+</div>
+
+<!-- Validation Scripts -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

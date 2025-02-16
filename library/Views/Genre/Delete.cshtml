@@ -1,0 +1,16 @@
+﻿@model Genre
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Delete Genre";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>Are you sure you want to delete the genre "@Model.Name"?</p>
+
+<form method="post">
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="@Url.Action("Index", "Genres")" class="btn btn-secondary">Cancel</a>
+</form>
+

@@ -1,0 +1,50 @@
+﻿@model Book
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>@ViewData["Title"]</h2>
+<div class="container  shadow border-3 p-4 mb-4">
+  <div class="row">
+      <div class="col-8">
+          
+    <dl class="dl-horizontal">
+        <dt>Title</dt>
+        <dd>@Model.Title</dd>
+
+        <dt>ISBN</dt>
+        <dd>@Model.ISBN</dd>
+        <dt>Price</dt>
+        <dd>@Model.Price.ToString("C")</dd>
+        <dt>Author</dt>
+        <dd>@Model.Author.Name</dd>
+        <dt>Genre</dt>
+        <dd>@Model.Genre.Name</dd>
+        <dt>Publisher</dt>
+        <dd>@Model.Publisher.Name</dd>
+                <dt>Availability</dt>
+                <dd>
+                    <span class="badge bg-@(Model.IsAvailable ? "success" : "danger")">
+                        @(Model.IsAvailable ? "Available" : "Not Available")
+                    </span>
+                </dd>
+               
+
+      </div>
+   <div class="col-4">
+       <img src="@Model.Image" width="100%" />
+   </div>
+  </div>
+</div>
+<div class="row d-flex justify-content-around">
+    <div class="col-3">
+        <a href="@Url.Action("Index")" class="btn btn-secondary shadow">Back to List</a>
+    </div>
+    <div class="col-3">
+    
+        <a class="btn btn-info shadow" asp-route-Id="@Model.Id" asp-controller="Cart" asp-action="AddToCart">Add To Card</a>
+    </div>
+   
+    
+</div>

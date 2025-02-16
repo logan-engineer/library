@@ -1,0 +1,49 @@
+﻿@model IEnumerable<LibraryBranch>
+
+@{
+    ViewData["Title"] = "Library Branches";
+}
+
+
+<div class="container mt-5">
+    <h1>@ViewData["Title"]</h1>
+
+    <!-- Table to display library branches -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Location</th>
+                <th scope="col">Books</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var branch in Model)
+            {
+                <tr>
+                    <td>@branch.Id</td>
+                    <td>@branch.Name</td>
+                    <td>@branch.Location</td>
+                    <td>
+                        @if (branch.Books != null && branch.Books.Any())
+                        {
+                            <ul>
+                                @foreach (var book in branch.Books)
+                                {
+                                    <li>@book.Title</li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <p>No books available</p>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
